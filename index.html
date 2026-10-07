@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Buscar produtos e serviços · Trama Viamão</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="topo">
+    <div class="conteiner">
+      <a class="marca" href="index.html">
+        <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="var(--primary)"/><path d="M6 11h22M6 17h22M6 23h22" stroke="#F4B63F" stroke-width="3"/><path d="M11 6v22M17 6v22M23 6v22" stroke="var(--on-primary)" stroke-width="3" stroke-dasharray="6 6" stroke-dashoffset="3"/></svg>
+        <span>Trama Viamão<small>Economia solidária perto de você</small></span>
+      </a>
+      <nav class="menu" aria-label="Principal">
+        <a class="atalho" href="index.html" aria-current="page">Buscar</a>
+        <a class="atalho" href="pages/entrar.html">Entrar</a>
+        <a class="botao destaque pequeno" href="pages/cadastrar.html">Cadastrar empreendimento</a>
+      </nav>
+      <fieldset class="tema">
+        <legend class="apenas-leitor">Tema da página</legend>
+        <label>
+          <input type="radio" name="tema" id="tema-claro">
+          <span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8M18.7 18.7l-1.8-1.8M7.1 7.1L5.3 5.3"/></svg>
+            <span class="apenas-leitor">Tema claro</span>
+          </span>
+        </label>
+        <label>
+          <input type="radio" name="tema" id="tema-escuro">
+          <span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.2 8.2 0 1 0 10.2 10.2z"/></svg>
+            <span class="apenas-leitor">Tema escuro</span>
+          </span>
+        </label>
+      </fieldset>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="capa">
+      <div class="conteiner">
+        <h1>Compre de quem produz perto de você</h1>
+        <p>Produtos e serviços de empreendimentos da economia solidária de Viamão. Encontre, escolha e fale direto com quem faz.</p>
+        <form class="busca-rapida" role="search" action="index.html">
+          <label class="apenas-leitor" for="busca-nome">Nome do item</label>
+          <input id="busca-nome" type="search" name="nome" placeholder="Ex.: mel, bolsa, conserto de roupas">
+          <button class="botao destaque" type="submit">Buscar</button>
+        </form>
+      </div>
+      <div class="faixa"></div>
+    </section>
+
+    <div class="conteiner pesquisa">
+      <form class="formulario-filtros" action="index.html">
+        <details class="filtros" open>
+          <summary>Filtros</summary>
+
+          <fieldset>
+            <legend>Como combinar os filtros</legend>
+            <div class="alternador">
+              <label><input type="radio" name="modo" value="E" checked><span>Todos (E)</span></label>
+              <label><input type="radio" name="modo" value="OU"><span>Qualquer (OU)</span></label>
+            </div>
+            <p class="dica">Com E, o item precisa atender a todos os filtros preenchidos. Com OU, basta atender a um deles.</p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Sobre o item</legend>
+            <label class="campo">
+              <span>Nome contém</span>
+              <input type="text" name="nome" placeholder="Ex.: mel">
+            </label>
+            <label class="campo">
+              <span>Descrição contém</span>
+              <input type="text" name="desc" placeholder="Ex.: algodão, orgânico">
+            </label>
+            <label class="campo">
+              <span>Natureza</span>
+              <select name="natureza"><option value="">Produto ou serviço</option><option>Produto</option><option>Serviço</option></select>
+            </label>
+            <label class="campo">
+              <span>Tipo de produto</span>
+              <select name="tipoProduto"><option value="">Todos</option><option>Alimento</option><option>Bebida</option><option>Comida</option><option>Roupa</option><option>Ferramenta</option><option>Artesanato</option><option>Higiene e limpeza</option></select>
+            </label>
+            <label class="campo">
+              <span>Tipo de serviço</span>
+              <select name="tipoServico"><option value="">Todos</option><option>Avulso</option><option>Locação</option><option>Assinatura</option><option>Reserva</option><option>Agendamento</option><option>Instalação</option><option>Licença</option><option>Consultoria</option><option>Aula</option></select>
+            </label>
+            <div class="linha">
+              <label class="campo">
+                <span>Preço mínimo</span>
+                <input type="number" name="precoMin" min="0" step="0.01" inputmode="decimal" placeholder="R$ 0">
+              </label>
+              <label class="campo">
+                <span>Preço máximo</span>
+                <input type="number" name="precoMax" min="0" step="0.01" inputmode="decimal" placeholder="R$ 200">
+              </label>
+            </div>
+            <p class="dica">Preencha só o mínimo, só o máximo, ou os dois para buscar numa faixa.</p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Sobre o empreendimento</legend>
+            <label class="campo">
+              <span>Nome do empreendimento</span>
+              <input type="text" name="empNome">
+            </label>
+            <label class="campo">
+              <span>CPF ou CNPJ</span>
+              <input type="text" name="empDoc" inputmode="numeric">
+              <small>Encontra apenas quem optou por exibir o documento.</small>
+            </label>
+            <label class="campo">
+              <span>Telefone</span>
+              <input type="tel" name="empTelefone">
+            </label>
+            <label class="campo">
+              <span>E-mail</span>
+              <input type="email" name="empEmail">
+            </label>
+            <label class="campo">
+              <span>Rede social</span>
+              <input type="text" name="empRede" placeholder="site, Facebook ou Instagram">
+            </label>
+            <label class="campo">
+              <span>Categoria do empreendimento</span>
+              <select name="empCategoria"><option value="">Todas</option><option>Autônomo</option><option>Pessoa física</option><option>Pessoa jurídica</option><option>Microempresa</option><option>Egresso IFRS</option><option>Cooperativa</option><option>Informal</option></select>
+            </label>
+            <label class="campo">
+              <span>Rua</span>
+              <input type="text" name="rua">
+            </label>
+            <label class="campo">
+              <span>Bairro</span>
+              <input type="text" name="bairro" placeholder="Ex.: Centro">
+            </label>
+            <div class="linha">
+              <label class="campo">
+                <span>Cidade</span>
+                <input type="text" name="cidade">
+              </label>
+              <label class="campo">
+                <span>Estado</span>
+                <input type="text" name="uf" maxlength="2" placeholder="RS">
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Distância de você</legend>
+            <button class="botao vazado pequeno" type="button">Usar minha localização</button>
+            <label class="campo">
+              <span>Ou escolha um ponto de partida</span>
+              <select name="ref">
+                <option value="">Selecione um bairro</option>
+                <option>Centro</option><option>Estalagem</option><option>Santa Isabel</option>
+                <option>Águas Claras</option><option>Passo do Vigário</option><option>Espigão</option><option>Itapuã</option>
+              </select>
+            </label>
+            <label class="campo">
+              <span>Raio máximo (km)</span>
+              <input type="number" name="raio" min="1" max="100" inputmode="numeric" placeholder="Ex.: 10">
+            </label>
+            <p class="dica">Sem ponto de partida, o filtro de distância é ignorado.</p>
+          </fieldset>
+
+          <div class="acoes">
+            <button class="botao pequeno" type="submit">Aplicar filtros</button>
+            <button class="botao vazado pequeno" type="reset">Limpar filtros</button>
+          </div>
+        </details>
+      </form>
+
+      <section aria-labelledby="titulo-resultados">
+        <h2 id="titulo-resultados" class="apenas-leitor">Resultados</h2>
+        <div class="cabecalho-resultados">
+          <p role="status">8 itens encontrados</p>
+          <label>Ordenar por
+            <select name="ordem"><option>Nome</option><option>Menor preço</option><option>Maior preço</option><option>Mais perto</option></select>
+          </label>
+        </div>
+        <div class="grade">
+          <article class="cartao">
+            <a class="cartao-link" href="pages/item.html">
+              <div class="foto-vazia textura1" style="--c1:#2E7D5B" role="img" aria-label="Espaço para foto do item"></div>
+              <div class="corpo">
+                <span class="etiqueta">Produto · Alimento</span>
+                <h3>Mel de flor silvestre 500 g</h3>
+                <div class="origem">Ecoflor Agroecologia<br>Itapuã, Viamão</div>
+                <div class="preco">R$ 32,00</div>
+              </div>
+            </a>
+            <div class="cartao-contato">
+              <a class="botao zap pequeno" href="https://wa.me/5551999112233?text=Ol%C3%A1!%20Vi%20na%20Trama%20Viam%C3%A3o." target="_blank" rel="noopener">WhatsApp</a>
+              <a class="botao vazado pequeno" href="mailto:contato@exemplo.org?subject=Interesse%20em%3A%20Mel%20de%20flor%20silvestre%20500%20g">E-mail</a>
+            </div>
+          </article>
+          <article class="cartao">
+            <a class="cartao-link" href="pages/item.html">
+              <div class="foto-vazia textura2" style="--c1:#8A3F7C" role="img" aria-label="Espaço para foto do item"></div>
+              <div class="corpo">
+                <span class="etiqueta">Produto · Alimento</span>
+                <h3>Cesta de hortaliças orgânicas</h3>
+                <div class="origem">Ecoflor Agroecologia<br>Itapuã, Viamão</div>
+                <div class="preco">R$ 45,00</div>
+              </div>
+            </a>
+            <div class="cartao-contato">
+              <a class="botao zap pequeno" href="https://wa.me/5551999112233?text=Ol%C3%A1!%20Vi%20na%20Trama%20Viam%C3%A3o." target="_blank" rel="noopener">WhatsApp</a>
+              <a class="botao vazado pequeno" href="mailto:contato@exemplo.org?subject=Interesse%20em%3A%20Cesta%20de%20hortaliças%20orgânicas">E-mail</a>
+            </div>
+          </article>
+          <article class="cartao">
+            <a class="cartao-link" href="pages/item.html">
+              <div class="foto-vazia textura4" style="--c1:#B0771A" role="img" aria-label="Espaço para foto do item"></div>
+              <div class="corpo">
+                <span class="etiqueta">Produto · Artesanato</span>
+                <h3>Bolsa de fibra de bananeira</h3>
+                <div class="origem">Ateliê Fios da Lagoa<br>Santa Isabel, Viamão</div>
+                <div class="preco">R$ 85,00</div>
+              </div>
+            </a>
+            <div class="cartao-contato">
+              <a class="botao zap pequeno" href="https://wa.me/5551999112233?text=Ol%C3%A1!%20Vi%20na%20Trama%20Viam%C3%A3o." target="_blank" rel="noopener">WhatsApp</a>
+              <a class="botao vazado pequeno" href="mailto:contato@exemplo.org?subject=Interesse%20em%3A%20Bolsa%20de%20fibra%20de%20bananeira">E-mail</a>
+            </div>
+          </article>
+          <article class="cartao">
+            <a class="cartao-link" href="pages/item.html">
+              <div class="foto-vazia textura1" style="--c1:#2E7D5B" role="img" aria-label="Espaço para foto do item"></div>
+              <div class="corpo">
+                <span class="etiqueta">Serviço · Aula</span>
+                <h3>Oficina de crochê para iniciantes</h3>
+                <div class="origem">Ateliê Fios da Lagoa<br>Santa Isabel, Viamão</div>
+                <div class="preco">R$ 60,00</div>
+              </div>
+            </a>
+            <div class="cartao-contato">
+              <a class="botao zap pequeno" href="https://wa.me/5551999112233?text=Ol%C3%A1!%20Vi%20na%20Trama%20Viam%C3%A3o." target="_blank" rel="noopener">WhatsApp</a>
+              <a class="botao vazado pequeno" href="mailto:contato@exemplo.org?subject=Interesse%20em%3A%20Oficina%20de%20crochê%20para%20iniciantes">E-mail</a>
+            </div>
+          </article>
+          <article class="cartao">
+            <a class="cartao-link" href="pages/item.html">
+              <div class="foto-vazia textura2" style="--c1:#8A3F7C" role="img" aria-label="Espaço para foto do item"></div>
+              <div class="corpo">
+                <span class="etiqueta">Serviço · Avulso</span>
+                <h3>Ajustes e barras</h3>
+                <div class="origem">Costura Coletiva Mulheres em Ação<br>Estalagem, Viamão</div>
+                <div class="preco">R$ 25,00</div>
+              </div>
+            </a>
+            <div class="cartao-contato">
+              <a class="botao zap pequeno" href="https://wa.me/5551999112233?text=Ol%C3%A1!%20Vi%20na%20Trama%20Viam%C3%A3o." target="_blank" rel="noopener">WhatsApp</a>
+              <a class="botao vazado pequeno" href="mailto:contato@exemplo.org?subject=Interesse%20em%3A%20Ajustes%20e%20barras">E-mail</a>
+            </div>
+          </article>
+          <article class="cartao">
+            <a class="cartao-link" href="pages/item.html">
+              <div class="foto-vazia textura3" style="--c1:#1F6F8B" role="img" aria-label="Espaço para foto do item"></div>
+              <div class="corpo">
+                <span class="etiqueta">Produto · Roupa</span>
+                <span class="selo sit-indisponivel">Indisponível</span>
+                <h3>Camiseta de algodão estampada à mão</h3>
+                <div class="origem">Costura Coletiva Mulheres em Ação<br>Estalagem, Viamão</div>
+                <div class="preco">R$ 55,00</div>
+              </div>
+            </a>
+            <div class="cartao-contato">
+              <a class="botao zap pequeno" href="https://wa.me/5551999112233?text=Ol%C3%A1!%20Vi%20na%20Trama%20Viam%C3%A3o." target="_blank" rel="noopener">WhatsApp</a>
+              <a class="botao vazado pequeno" href="mailto:contato@exemplo.org?subject=Interesse%20em%3A%20Camiseta%20de%20algodão%20estampada%20à%20mão">E-mail</a>
+            </div>
+          </article>
+          <article class="cartao">
+            <a class="cartao-link" href="pages/item.html">
+              <div class="foto-vazia textura4" style="--c1:#B0771A" role="img" aria-label="Espaço para foto do item"></div>
+              <div class="corpo">
+                <span class="etiqueta">Serviço · Avulso</span>
+                <h3>Frete de pequenos volumes</h3>
+                <div class="origem">Recicla Viamão<br>Águas Claras, Viamão</div>
+                <div class="preco preco-oculto">Preço sob consulta</div>
+              </div>
+            </a>
+            <div class="cartao-contato">
+              <a class="botao zap pequeno" href="https://wa.me/5551999112233?text=Ol%C3%A1!%20Vi%20na%20Trama%20Viam%C3%A3o." target="_blank" rel="noopener">WhatsApp</a>
+              <a class="botao vazado pequeno" href="mailto:contato@exemplo.org?subject=Interesse%20em%3A%20Frete%20de%20pequenos%20volumes">E-mail</a>
+            </div>
+          </article>
+          <article class="cartao">
+            <a class="cartao-link" href="pages/item.html">
+              <div class="foto-vazia textura0" style="--c1:#27337A" role="img" aria-label="Espaço para foto do item"></div>
+              <div class="corpo">
+                <span class="etiqueta">Produto · Higiene e limpeza</span>
+                <h3>Sabão em barra de óleo reciclado</h3>
+                <div class="origem">Recicla Viamão<br>Águas Claras, Viamão</div>
+                <div class="preco">R$ 8,00</div>
+              </div>
+            </a>
+            <div class="cartao-contato">
+              <a class="botao zap pequeno" href="https://wa.me/5551999112233?text=Ol%C3%A1!%20Vi%20na%20Trama%20Viam%C3%A3o." target="_blank" rel="noopener">WhatsApp</a>
+              <a class="botao vazado pequeno" href="mailto:contato@exemplo.org?subject=Interesse%20em%3A%20Sabão%20em%20barra%20de%20óleo%20reciclado">E-mail</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="conteiner">
+      <span>Trama Viamão · projeto de Front End.</span>
+      <a href="pages/telas.html">Mapa de telas</a>
+    </div>
+  </footer>
+</body>
+</html>

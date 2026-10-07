@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Perfil e usuários · Trama Viamão</title>
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/img/favicon.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="topo">
+    <div class="conteiner">
+      <a class="marca" href="../index.html">
+        <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="var(--primary)"/><path d="M6 11h22M6 17h22M6 23h22" stroke="#F4B63F" stroke-width="3"/><path d="M11 6v22M17 6v22M23 6v22" stroke="var(--on-primary)" stroke-width="3" stroke-dasharray="6 6" stroke-dashoffset="3"/></svg>
+        <span>Trama Viamão<small>Economia solidária perto de você</small></span>
+      </a>
+      <nav class="menu" aria-label="Principal">
+        <a class="atalho" href="../index.html">Buscar</a>
+        <a class="atalho" href="painel.html" aria-current="page">Meu painel</a>
+        <a class="botao vazado pequeno" href="../index.html">Sair</a>
+      </nav>
+      <fieldset class="tema">
+        <legend class="apenas-leitor">Tema da página</legend>
+        <label>
+          <input type="radio" name="tema" id="tema-claro">
+          <span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8M18.7 18.7l-1.8-1.8M7.1 7.1L5.3 5.3"/></svg>
+            <span class="apenas-leitor">Tema claro</span>
+          </span>
+        </label>
+        <label>
+          <input type="radio" name="tema" id="tema-escuro">
+          <span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.2 8.2 0 1 0 10.2 10.2z"/></svg>
+            <span class="apenas-leitor">Tema escuro</span>
+          </span>
+        </label>
+      </fieldset>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="conteiner area">
+      <aside class="lateral" aria-label="Menu do empreendimento">
+        <div class="quem">
+          <b>Ecoflor Agroecologia</b>
+          <span class="apagado">Maria Souza</span>
+          <div><span class="selo sit-ativo">Ativo</span></div>
+        </div>
+        <a href="painel.html">Visão geral</a>
+        <a href="itens.html">Meus itens<span class="contador">1</span></a>
+        <a href="perfil.html" aria-current="page">Perfil e usuários</a>
+      </aside>
+
+      <section>
+        <div class="cabecalho">
+          <h1>Perfil e usuários</h1>
+        </div>
+
+        <form class="painel formulario" novalidate>
+          <h2 class="subtitulo">Dados do empreendimento</h2>
+          <label class="campo">
+            <span>Nome do empreendimento<span class="obrigatorio" aria-hidden="true">*</span></span>
+            <input type="text" name="nome" value="Ecoflor Agroecologia" required>
+          </label>
+
+          <div class="campo-com-marcador">
+            <label class="campo">
+              <span>CPF ou CNPJ<span class="obrigatorio" aria-hidden="true">*</span></span>
+              <input type="text" name="documento" value="12.345.678/0001-90" inputmode="numeric" required>
+            </label>
+            <label class="marcador junto">
+              <input type="checkbox" name="documentoVisivel" checked>
+              <span>Exibir no site</span>
+            </label>
+          </div>
+
+          <label class="campo">
+            <span>Razão social</span>
+            <input type="text" name="razaoSocial" value="Ecoflor Agroecologia Ltda">
+          </label>
+
+          <div class="campo-com-marcador">
+            <label class="campo">
+              <span>Nome fantasia</span>
+              <input type="text" name="nomeFantasia" value="Ecoflor">
+            </label>
+            <label class="marcador junto">
+              <input type="checkbox" name="nomeFantasiaVisivel" checked>
+              <span>Exibir no site</span>
+            </label>
+          </div>
+
+          <label class="campo">
+            <span>Categoria do empreendimento<span class="obrigatorio" aria-hidden="true">*</span></span>
+            <select name="categoria" required><option value="">Selecione</option><option>Autônomo</option><option>Pessoa física</option><option>Pessoa jurídica</option><option>Microempresa</option><option>Egresso IFRS</option><option selected>Cooperativa</option><option>Informal</option></select>
+          </label>
+
+          <label class="campo">
+            <span>Descrição<span class="obrigatorio" aria-hidden="true">*</span></span>
+            <textarea name="descricao" rows="4" required>Grupo de 12 famílias que cultivam hortaliças, mel e frutas nativas sem agrotóxicos.</textarea>
+          </label>
+
+          <div class="campo-com-marcador">
+            <label class="campo">
+              <span>E-mail (também é o login)<span class="obrigatorio" aria-hidden="true">*</span></span>
+              <input type="email" name="email" value="contato@ecoflor.example" required>
+            </label>
+            <label class="marcador junto">
+              <input type="checkbox" name="emailVisivel" checked>
+              <span>Exibir no site</span>
+            </label>
+          </div>
+
+          <h2 class="subtitulo">Contato</h2>
+          <fieldset class="grupo">
+            <legend>Telefones</legend>
+            <ol class="lista-multipla">
+            <li class="item-multiplo">
+              <div class="campo-com-marcador">
+                <label class="campo">
+                  <span>Telefone 1<span class="obrigatorio" aria-hidden="true">*</span></span>
+                  <input type="tel" name="telefone1" value="(51) 3485-1100" autocomplete="tel" placeholder="(51) 99999-9999" required>
+                </label>
+                <label class="marcador junto">
+                  <input type="checkbox" name="telefone1Visivel" checked>
+                  <span>Exibir no site</span>
+                </label>
+              </div>
+            </li>
+            <li class="item-multiplo">
+              <div class="campo-com-marcador">
+                <label class="campo">
+                  <span>Telefone 2</span>
+                  <input type="tel" name="telefone2" value="(51) 99911-2233" autocomplete="tel" placeholder="(51) 99999-9999">
+                </label>
+                <label class="marcador junto">
+                  <input type="checkbox" name="telefone2Visivel" checked>
+                  <span>Exibir no site</span>
+                </label>
+              </div>
+              <button class="botao perigo pequeno" type="button">Remover</button>
+            </li>
+            </ol>
+            <button class="botao vazado pequeno" type="button">Adicionar telefone</button>
+            <p class="dica">Até 3 números.</p>
+          </fieldset>
+
+          <fieldset class="grupo">
+            <legend>WhatsApp</legend>
+            <ol class="lista-multipla">
+            <li class="item-multiplo">
+              <div class="campo-com-marcador">
+                <label class="campo">
+                  <span>WhatsApp 1</span>
+                  <input type="tel" name="whatsapp1" value="(51) 99911-2233" autocomplete="tel" placeholder="(51) 99999-9999">
+                </label>
+                <label class="marcador junto">
+                  <input type="checkbox" name="whatsapp1Visivel" checked>
+                  <span>Exibir no site</span>
+                </label>
+              </div>
+            </li>
+            </ol>
+            <button class="botao vazado pequeno" type="button">Adicionar whatsapp</button>
+            <p class="dica">Até 3 números.</p>
+          </fieldset>
+
+          <div class="campo-com-marcador">
+            <label class="campo">
+              <span>Site</span>
+              <input type="url" name="site" value="https://ecoflor.example" placeholder="https://">
+            </label>
+            <label class="marcador junto">
+              <input type="checkbox" name="siteVisivel" checked>
+              <span>Exibir no site</span>
+            </label>
+          </div>
+
+          <div class="campo-com-marcador">
+            <label class="campo">
+              <span>Facebook</span>
+              <input type="text" name="facebook" value="facebook.com/ecoflor" placeholder="facebook.com/seugrupo">
+            </label>
+            <label class="marcador junto">
+              <input type="checkbox" name="facebookVisivel" checked>
+              <span>Exibir no site</span>
+            </label>
+          </div>
+
+          <div class="campo-com-marcador">
+            <label class="campo">
+              <span>Instagram</span>
+              <input type="text" name="instagram" value="@ecoflor" placeholder="@seugrupo">
+            </label>
+            <label class="marcador junto">
+              <input type="checkbox" name="instagramVisivel" checked>
+              <span>Exibir no site</span>
+            </label>
+          </div>
+
+          <button class="botao" type="submit">Salvar perfil</button>
+        </form>
+
+        <form class="painel formulario" novalidate>
+          <h2 class="subtitulo">Endereços</h2>
+          <p class="apagado">O primeiro endereço da lista é o principal. Use Subir e Descer para mudar a ordem. É obrigatório manter pelo menos um, por isso o primeiro não tem botão de remover.</p>
+
+          <ol class="lista-enderecos">
+            <li class="endereco">
+              <div class="cabecalho-endereco">
+                <h3>Endereço <span class="selo sit-principal">Principal</span></h3>
+                <div class="mover-endereco">
+      
+                  <button class="botao vazado pequeno" type="button">Descer</button>
+      
+                </div>
+              </div>
+              <div class="linha">
+                <label class="campo duas-colunas">
+                  <span>Rua<span class="obrigatorio" aria-hidden="true">*</span></span>
+                  <input type="text" name="rua1" value="Rua das Figueiras" autocomplete="address-line1" required>
+                </label>
+                <label class="campo">
+                  <span>Número<span class="obrigatorio" aria-hidden="true">*</span></span>
+                  <input type="text" name="numero1" value="120" required>
+                </label>
+              </div>
+              <div class="linha">
+                <label class="campo">
+                  <span>Complemento</span>
+                  <input type="text" name="complemento1" value="" placeholder="Sala, galpão, fundos">
+                </label>
+                <label class="campo">
+                  <span>CEP<span class="obrigatorio" aria-hidden="true">*</span></span>
+                  <input type="text" name="cep1" value="94400-000" autocomplete="postal-code" inputmode="numeric" maxlength="9" placeholder="94000-000" required>
+                </label>
+              </div>
+              <div class="linha">
+                <label class="campo">
+                  <span>Bairro</span>
+                  <input type="text" name="bairro1" value="Itapuã" autocomplete="address-level3">
+                </label>
+                <label class="campo">
+                  <span>Cidade<span class="obrigatorio" aria-hidden="true">*</span></span>
+                  <input type="text" name="cidade1" value="Viamão" autocomplete="address-level2" required>
+                </label>
+                <label class="campo">
+                  <span>Estado</span>
+                  <select name="uf1"><option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option selected>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option></select>
+                </label>
+              </div>
+              <div class="campo-com-marcador">
+                <label class="campo">
+                  <span>Coordenadas do Google Maps</span>
+                  <input type="text" name="coordenadas1" value="-30.0811, -51.0233" placeholder="-30.0811, -51.0233">
+                  <small>Cole o par de latitude e longitude copiado do Google Maps. Mesmo oculto, continua valendo para o cálculo de distância.</small>
+                </label>
+                <label class="marcador junto">
+                  <input type="checkbox" name="coordenadasVisivel1">
+                  <span>Exibir no site</span>
+                </label>
+              </div>
+              <label class="marcador junto">
+                <input type="checkbox" name="enderecoVisivel1" checked>
+                <span>Exibir este endereço no site</span>
+              </label>
+            </li>
+            <li class="endereco">
+              <div class="cabecalho-endereco">
+                <h3>Endereço</h3>
+                <div class="mover-endereco">
+                  <button class="botao vazado pequeno" type="button">Subir</button>
+                  <button class="botao vazado pequeno" type="button">Descer</button>
+                  <button class="botao perigo pequeno" type="button">Remover</button>
+                </div>
+              </div>
+              <div class="linha">
+                <label class="campo duas-colunas">
+                  <span>Rua<span class="obrigatorio" aria-hidden="true">*</span></span>
+                  <input type="text" name="rua2" value="Avenida Beira Lago" autocomplete="address-line1" required>
+                </label>
+                <label class="campo">
+                  <span>Número<span class="obrigatorio" aria-hidden="true">*</span></span>
+                  <input type="text" name="numero2" value="88" required>
+                </label>
+              </div>
+              <div class="linha">
+                <label class="campo">
+                  <span>Complemento</span>
+                  <input type="text" name="complemento2" value="Galpão 2" placeholder="Sala, galpão, fundos">
+                </label>
+                <label class="campo">
+                  <span>CEP<span class="obrigatorio" aria-hidden="true">*</span></span>
+                  <input type="text" name="cep2" value="94410-120" autocomplete="postal-code" inputmode="numeric" maxlength="9" placeholder="94000-000" required>
+                </label>
+              </div>
+              <div class="linha">
+                <label class="campo">
+                  <span>Bairro</span>
+                  <input type="text" name="bairro2" value="Águas Claras" autocomplete="address-level3">
+                </label>
+                <label class="campo">
+                  <span>Cidade<span class="obrigatorio" aria-hidden="true">*</span></span>
+                  <input type="text" name="cidade2" value="Viamão" autocomplete="address-level2" required>
+                </label>
+                <label class="campo">
+                  <span>Estado</span>
+                  <select name="uf2"><option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option selected>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option></select>
+                </label>
+              </div>
+              <div class="campo-com-marcador">
+                <label class="campo">
+                  <span>Coordenadas do Google Maps</span>
+                  <input type="text" name="coordenadas2" value="" placeholder="-30.0811, -51.0233">
+                  <small>Cole o par de latitude e longitude copiado do Google Maps. Mesmo oculto, continua valendo para o cálculo de distância.</small>
+                </label>
+                <label class="marcador junto">
+                  <input type="checkbox" name="coordenadasVisivel2">
+                  <span>Exibir no site</span>
+                </label>
+              </div>
+              <label class="marcador junto">
+                <input type="checkbox" name="enderecoVisivel2" checked>
+                <span>Exibir este endereço no site</span>
+              </label>
+            </li>
+            <li class="endereco">
+              <div class="cabecalho-endereco">
+                <h3>Endereço</h3>
+                <div class="mover-endereco">
+                  <button class="botao vazado pequeno" type="button">Subir</button>
+      
+                  <button class="botao perigo pequeno" type="button">Remover</button>
+                </div>
+              </div>
+              <div class="linha">
+                <label class="campo duas-colunas">
+                  <span>Rua<span class="obrigatorio" aria-hidden="true">*</span></span>
+                  <input type="text" name="rua3" value="Rua Dois Irmãos" autocomplete="address-line1" required>
+                </label>
+                <label class="campo">
+                  <span>Número<span class="obrigatorio" aria-hidden="true">*</span></span>
+                  <input type="text" name="numero3" value="45" required>
+                </label>
+              </div>
+              <div class="linha">
+                <label class="campo">
+                  <span>Complemento</span>
+                  <input type="text" name="complemento3" value="Fundos" placeholder="Sala, galpão, fundos">
+                </label>
+                <label class="campo">
+                  <span>CEP<span class="obrigatorio" aria-hidden="true">*</span></span>
+                  <input type="text" name="cep3" value="94330-500" autocomplete="postal-code" inputmode="numeric" maxlength="9" placeholder="94000-000" required>
+                </label>
+              </div>
+              <div class="linha">
+                <label class="campo">
+                  <span>Bairro</span>
+                  <input type="text" name="bairro3" value="Centro" autocomplete="address-level3">
+                </label>
+                <label class="campo">
+                  <span>Cidade<span class="obrigatorio" aria-hidden="true">*</span></span>
+                  <input type="text" name="cidade3" value="Viamão" autocomplete="address-level2" required>
+                </label>
+                <label class="campo">
+                  <span>Estado</span>
+                  <select name="uf3"><option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option selected>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option></select>
+                </label>
+              </div>
+              <div class="campo-com-marcador">
+                <label class="campo">
+                  <span>Coordenadas do Google Maps</span>
+                  <input type="text" name="coordenadas3" value="" placeholder="-30.0811, -51.0233">
+                  <small>Cole o par de latitude e longitude copiado do Google Maps. Mesmo oculto, continua valendo para o cálculo de distância.</small>
+                </label>
+                <label class="marcador junto">
+                  <input type="checkbox" name="coordenadasVisivel3">
+                  <span>Exibir no site</span>
+                </label>
+              </div>
+              <label class="marcador junto">
+                <input type="checkbox" name="enderecoVisivel3" checked>
+                <span>Exibir este endereço no site</span>
+              </label>
+            </li>
+          </ol>
+
+          <div class="acoes colado">
+            <button class="botao vazado" type="button">Adicionar endereço</button>
+            <button class="botao" type="submit">Salvar endereços</button>
+          </div>
+        </form>
+
+        <form class="painel formulario" novalidate>
+          <h2 class="subtitulo">Fotos do empreendimento</h2>
+          <div class="envio-fotos">
+            <h3>Fotos</h3>
+            <p class="apagado">A primeira foto é a capa, usada na página pública do grupo.</p>
+            <input class="apenas-leitor entrada-arquivo" id="fotos-perfil" type="file" name="fotos-perfil" accept="image/*" multiple>
+            <label class="botao vazado" for="fotos-perfil">Adicionar fotos</label>
+            <p class="dica">JPG ou PNG, até 5 MB cada.</p>
+
+            <ul class="miniaturas">
+              <li class="miniatura">
+                <div class="foto-vazia textura1" style="--c1:#2E7D5B" role="img" aria-label="Foto 1"></div>
+                <div class="rodape-miniatura">
+                  <span class="selo sit-principal">Capa</span>
+                  <button class="botao perigo pequeno" type="button">Remover</button>
+                </div>
+              </li>
+              <li class="miniatura">
+                <div class="foto-vazia textura3" style="--c1:#B0771A" role="img" aria-label="Foto 2"></div>
+                <div class="rodape-miniatura">
+                  <button class="botao vazado pequeno" type="button">Usar como capa</button>
+                  <button class="botao perigo pequeno" type="button">Remover</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <button class="botao" type="submit">Salvar fotos</button>
+        </form>
+
+        <div class="painel formulario">
+          <h2 class="subtitulo">Usuários do empreendimento</h2>
+          <div class="linha-simples">
+            <div>
+              <b>Maria Souza</b> <span class="etiqueta">você</span> <span class="selo sit-ativo">Ativo</span>
+              <div class="email-usuario">maria@ecoflor.example</div>
+            </div>
+          </div>
+          <div class="linha-simples">
+            <div>
+              <b>João Pereira</b> <span class="selo sit-ativo">Ativo</span>
+              <div class="email-usuario">joao@ecoflor.example</div>
+            </div>
+            <div class="botoes">
+              <button class="botao vazado pequeno" type="button">Inativar</button>
+              <button class="botao perigo pequeno" type="button">Remover</button>
+            </div>
+          </div>
+
+          <h3>Adicionar usuário</h3>
+          <form novalidate>
+            <div class="linha">
+              <label class="campo">
+                <span>Nome<span class="obrigatorio" aria-hidden="true">*</span></span>
+                <input type="text" name="novoNome" autocomplete="name" required>
+              </label>
+              <label class="campo">
+                <span>E-mail<span class="obrigatorio" aria-hidden="true">*</span></span>
+                <input type="email" name="novoEmail" autocomplete="username" required>
+              </label>
+            </div>
+            <div class="linha">
+              <label class="campo">
+                <span>Senha inicial<span class="obrigatorio" aria-hidden="true">*</span></span>
+                <input type="password" name="novaSenha" minlength="6" autocomplete="new-password" required>
+                <small>Mínimo de 6 caracteres.</small>
+              </label>
+              <label class="campo">
+                <span>Confirmar senha<span class="obrigatorio" aria-hidden="true">*</span></span>
+                <input type="password" name="novaSenhaConfirma" minlength="6" autocomplete="new-password" required>
+              </label>
+            </div>
+            <button class="botao vazado" type="submit">Adicionar usuário</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="conteiner">
+      <span>Trama Viamão · projeto de Front End (layout estático).</span>
+      <a href="telas.html">Mapa de telas</a>
+    </div>
+  </footer>
+</body>
+</html>

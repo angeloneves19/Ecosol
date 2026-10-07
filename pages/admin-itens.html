@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Itens ofertados · Trama Viamão</title>
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/img/favicon.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="topo">
+    <div class="conteiner">
+      <a class="marca" href="../index.html">
+        <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="var(--primary)"/><path d="M6 11h22M6 17h22M6 23h22" stroke="#F4B63F" stroke-width="3"/><path d="M11 6v22M17 6v22M23 6v22" stroke="var(--on-primary)" stroke-width="3" stroke-dasharray="6 6" stroke-dashoffset="3"/></svg>
+        <span>Trama Viamão<small>Economia solidária perto de você</small></span>
+      </a>
+      <nav class="menu" aria-label="Principal">
+        <a class="atalho" href="../index.html">Buscar</a>
+        <a class="atalho" href="admin.html" aria-current="page">Administração</a>
+        <a class="botao vazado pequeno" href="../index.html">Sair</a>
+      </nav>
+      <fieldset class="tema">
+        <legend class="apenas-leitor">Tema da página</legend>
+        <label>
+          <input type="radio" name="tema" id="tema-claro">
+          <span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8M18.7 18.7l-1.8-1.8M7.1 7.1L5.3 5.3"/></svg>
+            <span class="apenas-leitor">Tema claro</span>
+          </span>
+        </label>
+        <label>
+          <input type="radio" name="tema" id="tema-escuro">
+          <span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.2 8.2 0 1 0 10.2 10.2z"/></svg>
+            <span class="apenas-leitor">Tema escuro</span>
+          </span>
+        </label>
+      </fieldset>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="conteiner area">
+      <aside class="lateral" aria-label="Menu da administração">
+        <div class="quem">
+          <b>Administração</b>
+          <span class="apagado">Equipe Trama Viamão</span>
+        </div>
+        <a href="admin.html">Painel</a>
+        <a href="admin-empreendimentos.html">Empreendimentos<span class="contador">1</span></a>
+        <a href="admin-itens.html" aria-current="page">Itens<span class="contador">2</span></a>
+        <a href="admin-tipos.html">Tipos e categorias</a>
+        <a href="admin-administradores.html">Administradores</a>
+      </aside>
+
+      <section>
+        <div class="cabecalho">
+          <h1>Itens ofertados</h1>
+        </div>
+
+        <nav class="abas" aria-label="Filtrar por situação">
+          <a href="admin-itens.html" aria-current="page">Pendentes (2)</a>
+          <a href="admin-itens.html">Disponíveis (8)</a>
+          <a href="admin-itens.html">Indisponíveis (2)</a>
+          <a href="admin-itens.html">Descontinuados (1)</a>
+          <a href="admin-itens.html">Recusados (1)</a>
+          <a href="admin-itens.html">Todos (14)</a>
+        </nav>
+
+        <div class="lista">
+        <article class="cartao-linha">
+          <div class="informacao">
+            <h3>Pão de fermentação natural <span class="selo sit-pendente">Pendente</span></h3>
+          <p>Produto · Comida · R$ 16,00 · 20 un</p>
+          <p>Por <a href="admin-empreendimentos.html">Ecoflor Agroecologia</a></p>
+          </div>
+          <div class="botoes">
+          <button class="botao positivo pequeno" type="button">Aprovar</button>
+          <button class="botao perigo pequeno" type="button">Recusar</button>
+          </div>
+        </article>
+        <article class="cartao-linha">
+          <div class="informacao">
+            <h3>Confecção de uniformes sob encomenda <span class="selo sit-pendente">Pendente</span></h3>
+          <p>Serviço · Avulso, Consultoria · R$ 35,00</p>
+          <p>Por <a href="admin-empreendimentos.html">Costura Coletiva Mulheres em Ação</a></p>
+          </div>
+          <div class="botoes">
+          <button class="botao positivo pequeno" type="button">Aprovar</button>
+          <button class="botao perigo pequeno" type="button">Recusar</button>
+          </div>
+        </article>
+        <article class="cartao-linha">
+          <div class="informacao">
+            <h3>Mel de flor silvestre 500 g <span class="selo sit-disponivel">Disponível</span></h3>
+          <p>Produto · Alimento, Artesanato · R$ 32,00 · 40 un</p>
+          <p>Por <a href="admin-empreendimentos.html">Ecoflor Agroecologia</a></p>
+          </div>
+          <div class="botoes">
+          <button class="botao perigo pequeno" type="button">Recusar</button>
+          </div>
+        </article>
+        <article class="cartao-linha">
+          <div class="informacao">
+            <h3>Camiseta de algodão estampada à mão <span class="selo sit-indisponivel">Indisponível</span></h3>
+          <p>Produto · Roupa · R$ 55,00</p>
+          <p>Marcado como indisponível pelo próprio empreendimento.</p>
+          </div>
+          <div class="botoes">
+          <button class="botao perigo pequeno" type="button">Recusar</button>
+          </div>
+        </article>
+        <article class="cartao-linha">
+          <div class="informacao">
+            <h3>Porta-copos de macramê (kit 4) <span class="selo sit-recusado">Recusado</span></h3>
+          <p>Produto · Artesanato · R$ 30,00</p>
+          <p>Por <a href="admin-empreendimentos.html">Ateliê Fios da Lagoa</a></p>
+          <p class="motivo"><b>Motivo:</b> Descrição muito curta. Informe material, medidas e cores.</p>
+          </div>
+          <div class="botoes">
+          <button class="botao positivo pequeno" type="button">Aprovar</button>
+          </div>
+        </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="conteiner">
+      <span>Trama Viamão · projeto de Front End (layout estático).</span>
+      <a href="telas.html">Mapa de telas</a>
+    </div>
+  </footer>
+</body>
+</html>
