@@ -3,7 +3,7 @@
 ![HTML5](https://img.shields.io/badge/HTML5-27337A?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-27337A?style=for-the-badge&logo=css3&logoColor=white)
 ![Javascript](https://img.shields.io/badge/Javascript-1F7A52?style=for-the-badge)
-![Supbase](https://img.shields.io/badge/Supbase-F4B63F?style=for-the-badge&labelColor=3A2A00)
+![Supbase](https://img.shields.io/badge/Supabase-F4B63F?style=for-the-badge&labelColor=3A2A00)
 ### 🧶 Uma rede para quem produz em Viamão
 
 **Plataforma de divulgação e venda dos empreendedores locais que comercializam no IFRS Viamão.**
