@@ -428,6 +428,27 @@
           <button class="botao" type="submit">Salvar fotos</button>
         </form>
 
+        <form class="painel formulario" novalidate>
+          <h2 class="subtitulo">Minha senha</h2>
+          <p class="apagado">Altere a senha que você usa para entrar na plataforma. Ela nunca aparece para o cliente.</p>
+          <label class="campo">
+            <span>Senha atual</span>
+            <input type="password" name="senhaAtual" autocomplete="current-password">
+          </label>
+          <div class="linha">
+            <label class="campo">
+              <span>Nova senha</span>
+              <input type="password" name="novaSenhaPropria" minlength="6" autocomplete="new-password">
+              <small>Mínimo de 6 caracteres. Deixe em branco para manter a atual.</small>
+            </label>
+            <label class="campo">
+              <span>Confirmar nova senha</span>
+              <input type="password" name="novaSenhaPropriaConfirma" minlength="6" autocomplete="new-password">
+            </label>
+          </div>
+          <button class="botao" type="submit">Alterar senha</button>
+        </form>
+
         <div class="painel formulario">
           <h2 class="subtitulo">Usuários do empreendimento</h2>
           <div class="linha-simples">
@@ -479,7 +500,7 @@
 
   <footer>
     <div class="conteiner">
-      <span>Trama Viamão · projeto de Front End (layout estático).</span>
+      <span>Trama Viamão · empreendimentos da economia solidária de Viamão.</span>
       <a href="telas.html">Mapa de telas</a>
     </div>
   </footer>

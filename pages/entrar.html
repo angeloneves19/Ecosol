@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Entrar · Trama Viamão</title>
+  <title>Novo item · Trama Viamão</title>
   <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/img/favicon.png" sizes="32x32">
   <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
@@ -23,8 +23,8 @@
       </a>
       <nav class="menu" aria-label="Principal">
         <a class="atalho" href="../index.html">Buscar</a>
-        <a class="atalho" href="entrar.html" aria-current="page">Entrar</a>
-        <a class="botao destaque pequeno" href="cadastrar.html">Cadastrar empreendimento</a>
+        <a class="atalho" href="painel.html" aria-current="page">Meu painel</a>
+        <a class="botao vazado pequeno" href="../index.html">Sair</a>
       </nav>
       <fieldset class="tema">
         <legend class="apenas-leitor">Tema da página</legend>
@@ -47,31 +47,148 @@
   </header>
 
   <main id="conteudo">
-    <div class="estreito">
-      <h1 class="titulo-pagina">Entrar</h1>
-      <p class="apagado">Acesso para empreendimentos e administração.</p>
+    <div class="conteiner area">
+      <aside class="lateral" aria-label="Menu do empreendimento">
+        <div class="quem">
+          <b>Ecoflor Agroecologia</b>
+          <span class="apagado">Maria Souza</span>
+          <div><span class="selo sit-ativo">Ativo</span></div>
+        </div>
+        <a href="painel.html">Visão geral</a>
+        <a href="itens.html" aria-current="page">Meus itens<span class="contador">1</span></a>
+        <a href="perfil.html">Perfil e usuários</a>
+      </aside>
 
-      <form action="painel.html" novalidate>
-        <p class="aviso erro" id="erro-acesso" role="alert">Os dados de acesso não conferem. Tente de novo.</p>
-        <label class="campo">
-          <span>E-mail, CPF ou telefone<span class="obrigatorio" aria-hidden="true">*</span></span>
-          <input type="text" name="identificador" autocomplete="username" aria-invalid="true" aria-describedby="erro-acesso" required>
-          <small>Use qualquer um dos três que você cadastrou.</small>
-        </label>
-        <label class="campo">
-          <span>Senha<span class="obrigatorio" aria-hidden="true">*</span></span>
-          <input type="password" name="senha" autocomplete="current-password" aria-invalid="true" aria-describedby="erro-acesso" required>
-        </label>
-        <button class="botao largo" type="submit">Entrar</button>
-      </form>
+      <section>
+        <div class="cabecalho">
+          <h1>Novo item</h1>
+        </div>
 
-      <p>Ainda não tem cadastro? <a href="cadastrar.html">Cadastre seu empreendimento</a>.</p>
+        <form class="painel painel-estreito" action="itens.html" novalidate>
+          <p class="aviso atencao">Ao salvar alterações em um item já aprovado, ele volta para pendente e sai da busca até ser aprovado de novo.</p>
+
+          <fieldset class="grupo">
+            <legend>Natureza</legend>
+            <div class="alternador">
+              <label><input type="radio" name="natureza" value="produto" checked><span>Produto</span></label>
+              <label><input type="radio" name="natureza" value="servico"><span>Serviço</span></label>
+            </div>
+            <p class="dica">Um item pertence a uma única natureza. Marque os tipos correspondentes a ela.</p>
+          </fieldset>
+
+          <fieldset class="grupo">
+            <legend>Tipos de produto (marque quantos quiser)</legend>
+            <div class="etiquetas">
+              <label><input type="checkbox" name="tiposProduto" value="alimento" checked><span>Alimento</span></label>
+                <label><input type="checkbox" name="tiposProduto" value="bebida"><span>Bebida</span></label>
+                <label><input type="checkbox" name="tiposProduto" value="comida"><span>Comida</span></label>
+                <label><input type="checkbox" name="tiposProduto" value="roupa"><span>Roupa</span></label>
+                <label><input type="checkbox" name="tiposProduto" value="ferramenta"><span>Ferramenta</span></label>
+                <label><input type="checkbox" name="tiposProduto" value="artesanato"><span>Artesanato</span></label>
+                <label><input type="checkbox" name="tiposProduto" value="higiene-e-limpeza"><span>Higiene e limpeza</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="grupo">
+            <legend>Tipos de serviço (marque quantos quiser)</legend>
+            <div class="etiquetas">
+              <label><input type="checkbox" name="tiposServico" value="avulso"><span>Avulso</span></label>
+                <label><input type="checkbox" name="tiposServico" value="locacao"><span>Locação</span></label>
+                <label><input type="checkbox" name="tiposServico" value="assinatura"><span>Assinatura</span></label>
+                <label><input type="checkbox" name="tiposServico" value="reserva"><span>Reserva</span></label>
+                <label><input type="checkbox" name="tiposServico" value="agendamento"><span>Agendamento</span></label>
+                <label><input type="checkbox" name="tiposServico" value="instalacao"><span>Instalação</span></label>
+                <label><input type="checkbox" name="tiposServico" value="licenca"><span>Licença</span></label>
+                <label><input type="checkbox" name="tiposServico" value="consultoria"><span>Consultoria</span></label>
+                <label><input type="checkbox" name="tiposServico" value="aula"><span>Aula</span></label>
+            </div>
+          </fieldset>
+
+          <label class="campo">
+            <span>Nome do item<span class="obrigatorio" aria-hidden="true">*</span></span>
+            <input type="text" name="nome" required>
+          </label>
+
+          <label class="campo">
+            <span>Descrição<span class="obrigatorio" aria-hidden="true">*</span></span>
+            <textarea name="descricao" rows="5" required></textarea>
+            <small>Inclua material, tamanho, prazo, forma de retirada ou entrega.</small>
+          </label>
+
+          <div class="linha">
+            <div class="campo-com-marcador">
+              <label class="campo">
+                <span>Preço atual (R$)<span class="obrigatorio" aria-hidden="true">*</span></span>
+                <input type="number" name="preco" min="0" step="0.01" inputmode="decimal" required>
+                <small>Visível na página de resultados.</small>
+              </label>
+              <label class="marcador junto">
+                <input type="checkbox" name="precoVisivel" checked>
+                <span>Exibir no site</span>
+              </label>
+            </div>
+            <div class="campo-com-marcador">
+              <label class="campo">
+                <span>Quantidade em estoque<span class="obrigatorio" aria-hidden="true">*</span></span>
+                <input type="number" name="estoque" min="0" step="1" inputmode="numeric" required>
+                <small>Para pronta entrega.</small>
+              </label>
+              <label class="marcador junto">
+                <input type="checkbox" name="estoqueVisivel">
+                <span>Exibir no site</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="linha">
+            <label class="campo">
+              <span>Unidade<span class="obrigatorio" aria-hidden="true">*</span></span>
+              <select name="unidade" required><option>Não se aplica</option><option selected>Unidade</option><option>Quilo</option><option>Litro</option><option>Metro</option></select>
+            </label>
+            <label class="campo">
+              <span>Situação<span class="obrigatorio" aria-hidden="true">*</span></span>
+              <select name="situacao" required><option selected>Disponível</option><option>Indisponível</option><option>Descontinuado</option></select>
+              <small>Indisponível aparece na busca sem permitir pedido. Descontinuado sai da busca.</small>
+            </label>
+          </div>
+
+          <div class="envio-fotos">
+            <h3>Fotos do item</h3>
+            <p class="apagado">A primeira foto da lista é usada como capa na busca.</p>
+            <input class="apenas-leitor entrada-arquivo" id="fotos-item" type="file" name="fotos-item" accept="image/*" multiple>
+            <label class="botao vazado" for="fotos-item">Adicionar fotos</label>
+            <p class="dica">JPG ou PNG, até 5 MB cada.</p>
+
+            <ul class="miniaturas">
+              <li class="miniatura">
+                <div class="foto-vazia textura1" style="--c1:#2E7D5B" role="img" aria-label="Foto 1"></div>
+                <div class="rodape-miniatura">
+                  <span class="selo sit-principal">Capa</span>
+                  <button class="botao perigo pequeno" type="button">Remover</button>
+                </div>
+              </li>
+              <li class="miniatura">
+                <div class="foto-vazia textura3" style="--c1:#B0771A" role="img" aria-label="Foto 2"></div>
+                <div class="rodape-miniatura">
+                  <button class="botao vazado pequeno" type="button">Usar como capa</button>
+                  <button class="botao perigo pequeno" type="button">Remover</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="acoes">
+            <button class="botao" type="submit">Enviar para aprovação</button>
+            <a class="botao vazado" href="itens.html">Cancelar</a>
+          </div>
+        </form>
+      </section>
     </div>
   </main>
 
   <footer>
     <div class="conteiner">
-      <span>Trama Viamão · projeto de Front End (layout estático).</span>
+      <span>Trama Viamão · empreendimentos da economia solidária de Viamão.</span>
       <a href="telas.html">Mapa de telas</a>
     </div>
   </footer>
