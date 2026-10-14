@@ -53,7 +53,8 @@
           <h1 class="titulo-pagina">Cadastre seu empreendimento</h1>
           <p class="apagado abertura">Preencha os dados do grupo e crie o primeiro acesso. Os campos marcados com "Exibir no site" são os que o cliente vê na busca; o resto fica só com a administração.</p>
 
-          <form action="status-pendente.html" novalidate>
+          <form id="form-cadastro" action="status-pendente.html" novalidate>
+            <p class="aviso erro" id="aviso-cadastro" role="alert" hidden></p>
             <p class="dica">Campos com <span class="obrigatorio">*</span> são obrigatórios. Os marcados com "Exibir no site" são os que o cliente vê.</p>
 
             <h2 class="subtitulo">Sobre o empreendimento</h2>
@@ -203,7 +204,8 @@
                   </label>
                   <label class="campo">
                     <span>Número<span class="obrigatorio" aria-hidden="true">*</span></span>
-                    <input type="text" name="numero1" value="" required>
+                    <input type="text" name="numero1" value="" inputmode="numeric" pattern="[0-9]+" required>
+                    <small>Apenas números.</small>
                   </label>
                 </div>
                 <div class="linha">
@@ -319,5 +321,6 @@
       <a href="telas.html">Mapa de telas</a>
     </div>
   </footer>
+  <script type="module" src="../assets/js/cadastro.js"></script>
 </body>
 </html>
