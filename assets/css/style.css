@@ -80,6 +80,10 @@ body:has(#tema-escuro:checked) {
   --hero-ink: #FFFFFF;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 *,
 *::before,
 *::after {
@@ -1609,4 +1613,12 @@ footer .conteiner {
   .tema {
     order: 3;
   }
+}
+
+.aviso-salvo {
+  margin: 0 0 14px;
+}
+
+.endereco .linha {
+  margin-bottom: 12px;
 }

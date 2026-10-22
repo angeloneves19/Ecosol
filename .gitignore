@@ -1,0 +1,7 @@
+assets/js/supabase.js
+
+.env
+.env.local
+.vscode/
+.DS_Store
+Thumbs.db

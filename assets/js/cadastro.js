@@ -1,15 +1,42 @@
 import { supabase } from './supabase.js'
+import { ligarRepetidor, coletar } from './campos-repetidos.js'
 
 const form = document.querySelector('#form-cadastro')
 const aviso = document.querySelector('#aviso-cadastro')
 const botao = form.querySelector('button[type="submit"]')
 const selectCategoria = form.querySelector('[name="categoria"]')
 
+const grupos = [...form.querySelectorAll('fieldset.grupo')]
+const grupoTelefones = grupos.find((g) => g.querySelector('legend').textContent.startsWith('Telefones'))
+const grupoWhatsapps = grupos.find((g) => g.querySelector('legend').textContent.startsWith('WhatsApp'))
+const listaEnderecos = form.querySelector('.lista-enderecos')
+const botaoEndereco = [...form.querySelectorAll('button[type="button"]')]
+  .find((b) => b.textContent.includes('Adicionar endereço'))
+
 function mostrar(texto, tipo) {
   aviso.textContent = texto
   aviso.className = 'aviso ' + tipo
   aviso.hidden = false
   aviso.scrollIntoView({ block: 'center', behavior: 'smooth' })
+}
+
+function liberar() {
+  botao.disabled = false
+  botao.textContent = 'Enviar cadastro para análise'
+}
+
+function digitos(valor) {
+  return (valor || '').replace(/\D/g, '')
+}
+
+function campo(nome) {
+  const elemento = form.querySelector(`[name="${nome}"]`)
+  return elemento ? elemento.value.trim() : ''
+}
+
+function marcado(nome) {
+  const elemento = form.querySelector(`[name="${nome}"]`)
+  return elemento ? elemento.checked : false
 }
 
 async function carregarCategorias() {
@@ -19,7 +46,7 @@ async function carregarCategorias() {
     .order('nome')
 
   if (error) {
-    mostrar('Não foi possível carregar as categorias. Recarregue a página.', 'erro')
+    mostrar('Não consegui carregar as categorias: ' + error.message, 'erro')
     return
   }
 
@@ -32,67 +59,102 @@ async function carregarCategorias() {
   }
 }
 
-function soDigitos(valor) {
-  return (valor || '').replace(/\D/g, '')
-}
-
-function montarDados(dados) {
-  const documento = soDigitos(dados.get('documento'))
-  const coordenadas = (dados.get('coordenadas1') || '').split(',')
-
-  return {
-    id_categoria: dados.get('categoria'),
-    nome: dados.get('nome'),
-    nome_fantasia: dados.get('nomeFantasia'),
-    nome_fantasia_visivel: dados.has('nomeFantasiaVisivel'),
-    razao_social: dados.get('razaoSocial'),
-    descricao: dados.get('descricao'),
-    email_visivel: dados.has('emailVisivel'),
-    cpf: documento.length === 11 ? documento : '',
-    cnpj: documento.length === 14 ? documento : '',
-    documento_visivel: dados.has('documentoVisivel'),
-    telefone1: dados.get('telefone1'),
-    telefone1_visivel: dados.has('telefone1Visivel'),
-    whatsapp1: dados.get('whatsapp1'),
-    whatsapp1_visivel: dados.has('whatsapp1Visivel'),
-    site: dados.get('site'),
-    site_visivel: dados.has('siteVisivel'),
-    facebook: dados.get('facebook'),
-    facebook_visivel: dados.has('facebookVisivel'),
-    instagram: dados.get('instagram'),
-    instagram_visivel: dados.has('instagramVisivel'),
-    usuario_nome: dados.get('usuarioNome'),
-    enderecos: [{
-      rua: dados.get('rua1'),
-      numero: dados.get('numero1'),
-      complemento: dados.get('complemento1'),
-      bairro: dados.get('bairro1'),
-      cidade: dados.get('cidade1'),
-      uf: dados.get('uf1'),
-      cep: dados.get('cep1'),
-      latitude: (coordenadas[0] || '').trim(),
-      longitude: (coordenadas[1] || '').trim(),
-      visivel: dados.has('enderecoVisivel1'),
-      coordenadas_visivel: dados.has('coordenadasVisivel1')
-    }]
-  }
-}
-
-function validar(dados) {
-  const documento = soDigitos(dados.get('documento'))
+function validar(enderecos) {
+  const documento = digitos(campo('documento'))
   if (documento.length !== 11 && documento.length !== 14) {
     return 'Informe um CPF com 11 dígitos ou um CNPJ com 14.'
   }
-  if (dados.get('senha') !== dados.get('senhaConfirma')) {
-    return 'As duas senhas não conferem.'
-  }
-  if ((dados.get('senha') || '').length < 6) {
+  if (campo('senha').length < 6) {
     return 'A senha precisa ter pelo menos 6 caracteres.'
   }
-  if (soDigitos(dados.get('cep1')).length !== 8) {
-    return 'Informe um CEP com 8 dígitos.'
+  if (campo('senha') !== campo('senhaConfirma')) {
+    return 'As duas senhas não conferem.'
+  }
+  if (!campo('telefone1')) {
+    return 'Informe pelo menos um telefone.'
+  }
+  for (const [posicao, endereco] of enderecos.entries()) {
+    if (!endereco.rua || !endereco.numero || !endereco.cidade) {
+      return `Complete rua, número e cidade do endereço ${posicao + 1}.`
+    }
+    if (digitos(endereco.cep).length !== 8) {
+      return `Informe um CEP com 8 dígitos no endereço ${posicao + 1}.`
+    }
   }
   return null
+}
+
+function lerContatos(grupo, prefixo) {
+  const valores = {}
+  const itens = [...grupo.querySelectorAll('.item-multiplo')]
+
+  itens.forEach((item, posicao) => {
+    const numero = posicao + 1
+    const entrada = item.querySelector('input[type="tel"]')
+    const visivel = item.querySelector('input[type="checkbox"]')
+    valores[`${prefixo}${numero}`] = entrada ? entrada.value.trim() : ''
+    valores[`${prefixo}${numero}_visivel`] = visivel ? visivel.checked : true
+  })
+
+  return valores
+}
+
+function montarDados(enderecos) {
+  const documento = digitos(campo('documento'))
+  const ehCpf = documento.length === 11
+
+  return {
+    id_categoria: campo('categoria'),
+    nome: campo('nome'),
+    nome_fantasia: campo('nomeFantasia'),
+    nome_fantasia_visivel: marcado('nomeFantasiaVisivel'),
+    razao_social: campo('razaoSocial'),
+    descricao: campo('descricao'),
+    email_visivel: marcado('emailVisivel'),
+    cpf: ehCpf ? documento : '',
+    cnpj: ehCpf ? '' : documento,
+    documento_visivel: marcado('documentoVisivel'),
+    ...lerContatos(grupoTelefones, 'telefone'),
+    ...lerContatos(grupoWhatsapps, 'whatsapp'),
+    site: campo('site'),
+    site_visivel: marcado('siteVisivel'),
+    facebook: campo('facebook'),
+    facebook_visivel: marcado('facebookVisivel'),
+    instagram: campo('instagram'),
+    instagram_visivel: marcado('instagramVisivel'),
+    usuario_nome: campo('usuarioNome'),
+    enderecos: enderecos.map((endereco) => {
+      const coordenadas = (endereco.coordenadas || '').split(',')
+      return {
+        rua: endereco.rua,
+        numero: endereco.numero,
+        complemento: endereco.complemento,
+        bairro: endereco.bairro,
+        cidade: endereco.cidade,
+        uf: endereco.uf,
+        cep: endereco.cep,
+        latitude: (coordenadas[0] || '').trim(),
+        longitude: (coordenadas[1] || '').trim(),
+        visivel: endereco.visivel,
+        coordenadas_visivel: endereco.coordenadas_visivel
+      }
+    })
+  }
+}
+
+function lerEnderecos() {
+  return coletar(listaEnderecos, {
+    rua: '[name^="rua"]',
+    numero: '[name^="numero"]',
+    complemento: '[name^="complemento"]',
+    cep: '[name^="cep"]',
+    bairro: '[name^="bairro"]',
+    cidade: '[name^="cidade"]',
+    uf: '[name^="uf"]',
+    coordenadas: '[name^="coordenadas"]:not([type="checkbox"])',
+    coordenadas_visivel: '[name^="coordenadasVisivel"]',
+    visivel: '[name^="enderecoVisivel"]'
+  })
 }
 
 form.addEventListener('submit', async (evento) => {
@@ -103,8 +165,8 @@ form.addEventListener('submit', async (evento) => {
     return
   }
 
-  const dados = new FormData(form)
-  const problema = validar(dados)
+  const enderecos = lerEnderecos()
+  const problema = validar(enderecos)
   if (problema) {
     mostrar(problema, 'erro')
     return
@@ -114,30 +176,45 @@ form.addEventListener('submit', async (evento) => {
   botao.textContent = 'Enviando...'
 
   const { error: erroAuth } = await supabase.auth.signUp({
-    email: dados.get('email'),
-    password: dados.get('senha')
+    email: campo('email').toLowerCase(),
+    password: campo('senha')
   })
 
   if (erroAuth) {
-    const repetido = erroAuth.message.includes('already registered')
-    mostrar(repetido ? 'Este e-mail já tem cadastro. Entre na sua conta.' : erroAuth.message, 'erro')
-    botao.disabled = false
-    botao.textContent = 'Enviar cadastro para análise'
+    mostrar(
+      erroAuth.message.includes('already registered')
+        ? 'Este e-mail já tem cadastro. Entre na sua conta.'
+        : erroAuth.message,
+      'erro'
+    )
+    liberar()
     return
   }
 
   const { error: erroCadastro } = await supabase.rpc('cadastrar_empreendimento', {
-    dados: montarDados(dados)
+    dados: montarDados(enderecos)
   })
 
   if (erroCadastro) {
     mostrar('O acesso foi criado, mas o cadastro falhou: ' + erroCadastro.message, 'erro')
-    botao.disabled = false
-    botao.textContent = 'Enviar cadastro para análise'
+    liberar()
     return
   }
 
   window.location.href = 'status-pendente.html'
 })
+
+for (const [grupo, maximo] of [[grupoTelefones, 3], [grupoWhatsapps, 3]]) {
+  if (!grupo) continue
+  ligarRepetidor({
+    lista: grupo.querySelector('.lista-multipla'),
+    botao: grupo.querySelector('button[type="button"]'),
+    maximo
+  })
+}
+
+if (listaEnderecos && botaoEndereco) {
+  ligarRepetidor({ lista: listaEnderecos, botao: botaoEndereco })
+}
 
 carregarCategorias()
