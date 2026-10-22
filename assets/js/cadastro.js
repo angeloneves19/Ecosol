@@ -208,7 +208,7 @@ for (const [grupo, maximo] of [[grupoTelefones, 3], [grupoWhatsapps, 3]]) {
   if (!grupo) continue
   ligarRepetidor({
     lista: grupo.querySelector('.lista-multipla'),
-    botao: grupo.querySelector('button[type="button"]'),
+    botao: grupo.querySelector(':scope > button[type="button"]'),
     maximo
   })
 }

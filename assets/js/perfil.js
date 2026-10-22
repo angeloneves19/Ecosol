@@ -1,11 +1,13 @@
 import { supabase } from './supabase.js'
 import { exigirEmpreendimento, ligarBotaoSair, SITUACOES } from './sessao.js'
+import { ligarRepetidor } from './campos-repetidos.js'
 
 const dados = await exigirEmpreendimento()
 if (dados) {
   const { usuario, empreendimento } = dados
   const formDados = document.querySelectorAll('.painel.formulario')[0]
   const formEnderecos = document.querySelectorAll('.painel.formulario')[1]
+  const formFotos = document.querySelectorAll('.painel.formulario')[2]
   const formSenha = document.querySelectorAll('.painel.formulario')[3]
   const painelUsuarios = document.querySelectorAll('.painel.formulario')[4]
   const listaEnderecos = formEnderecos.querySelector('.lista-enderecos')
@@ -69,6 +71,85 @@ if (dados) {
     }
   }
 
+  const grupos = [...formDados.querySelectorAll('fieldset.grupo')]
+  const grupoTelefones = grupos.find((g) => g.querySelector('legend').textContent.startsWith('Telefones'))
+  const grupoWhatsapps = grupos.find((g) => g.querySelector('legend').textContent.startsWith('WhatsApp'))
+
+  function montarContatos(grupo, prefixo) {
+    const lista = grupo.querySelector('.lista-multipla')
+    const modelo = lista.children[0].cloneNode(true)
+
+    const valores = [1, 2, 3]
+      .map((n) => ({
+        numero: empreendimento[`${prefixo}${n}`],
+        visivel: empreendimento[`${prefixo}${n}_visivel`]
+      }))
+      .filter((contato) => contato.numero)
+
+    if (!valores.length) valores.push({ numero: '', visivel: true })
+
+    lista.innerHTML = ''
+
+    valores.forEach((contato, posicao) => {
+      const item = modelo.cloneNode(true)
+      const entrada = item.querySelector('input[type="tel"]')
+      const marcador = item.querySelector('input[type="checkbox"]')
+
+      entrada.value = contato.numero
+      marcador.checked = contato.visivel !== false
+
+      const velho = item.querySelector('.botao.perigo')
+      if (velho) velho.remove()
+
+      if (posicao > 0) {
+        const remover = document.createElement('button')
+        remover.type = 'button'
+        remover.className = 'botao perigo pequeno'
+        remover.textContent = 'Remover'
+        remover.addEventListener('click', () => {
+          item.remove()
+          renumerarContatos(lista)
+        })
+        item.append(remover)
+      }
+
+      lista.append(item)
+    })
+
+    renumerarContatos(lista)
+
+    ligarRepetidor({
+      lista,
+      botao: grupo.querySelector(':scope > button[type="button"]'),
+      maximo: 3
+    })
+  }
+
+  function renumerarContatos(lista) {
+    ;[...lista.children].forEach((item, posicao) => {
+      for (const campo of item.querySelectorAll('[name]')) {
+        campo.name = campo.name.replace(/(\d+)(?=\D*$)/, posicao + 1)
+      }
+      const rotulo = item.querySelector('.campo > span')
+      if (rotulo) rotulo.innerHTML = rotulo.innerHTML.replace(/ \d+/, ' ' + (posicao + 1))
+    })
+  }
+
+  function lerContatos(grupo, prefixo) {
+    const valores = {}
+    const itens = [...grupo.querySelectorAll('.item-multiplo')]
+
+    for (let n = 1; n <= 3; n += 1) {
+      const item = itens[n - 1]
+      const entrada = item ? item.querySelector('input[type="tel"]') : null
+      const marcador = item ? item.querySelector('input[type="checkbox"]') : null
+      valores[`${prefixo}${n}`] = entrada && entrada.value.trim() ? entrada.value.trim() : null
+      valores[`${prefixo}${n}_visivel`] = marcador ? marcador.checked : true
+    }
+
+    return valores
+  }
+
   function preencherDados() {
     preencher('nome', empreendimento.nome)
     preencher('documento', empreendimento.cnpj || empreendimento.cpf)
@@ -76,9 +157,6 @@ if (dados) {
     preencher('nomeFantasia', empreendimento.nome_fantasia)
     preencher('descricao', empreendimento.descricao)
     preencher('email', empreendimento.email)
-    preencher('telefone1', empreendimento.telefone1)
-    preencher('telefone2', empreendimento.telefone2)
-    preencher('whatsapp1', empreendimento.whatsapp1)
     preencher('site', empreendimento.site)
     preencher('facebook', empreendimento.facebook)
     preencher('instagram', empreendimento.instagram)
@@ -86,9 +164,6 @@ if (dados) {
     marcar('documentoVisivel', empreendimento.cnpj ? empreendimento.cnpj_visivel : empreendimento.cpf_visivel)
     marcar('nomeFantasiaVisivel', empreendimento.nome_fantasia_visivel)
     marcar('emailVisivel', empreendimento.email_visivel)
-    marcar('telefone1Visivel', empreendimento.telefone1_visivel)
-    marcar('telefone2Visivel', empreendimento.telefone2_visivel)
-    marcar('whatsapp1Visivel', empreendimento.whatsapp1_visivel)
     marcar('siteVisivel', empreendimento.site_visivel)
     marcar('facebookVisivel', empreendimento.facebook_visivel)
     marcar('instagramVisivel', empreendimento.instagram_visivel)
@@ -120,12 +195,8 @@ if (dados) {
       cnpj: ehCpf ? null : documento,
       cnpj_visivel: ehCpf ? false : marcado('documentoVisivel'),
       email_visivel: marcado('emailVisivel'),
-      telefone1: valor('telefone1'),
-      telefone1_visivel: marcado('telefone1Visivel'),
-      telefone2: valor('telefone2') || null,
-      telefone2_visivel: marcado('telefone2Visivel'),
-      whatsapp1: valor('whatsapp1') || null,
-      whatsapp1_visivel: marcado('whatsapp1Visivel'),
+      ...lerContatos(grupoTelefones, 'telefone'),
+      ...lerContatos(grupoWhatsapps, 'whatsapp'),
       site: valor('site') || null,
       site_visivel: marcado('siteVisivel'),
       facebook: valor('facebook') || null,
@@ -284,7 +355,10 @@ if (dados) {
     avisar(formEnderecos, 'Endereços salvos.', 'informacao')
   })
 
-  formEnderecos.querySelector('[type="button"]').addEventListener('click', async () => {
+  const botaoNovoEndereco = [...formEnderecos.querySelectorAll('button[type="button"]')]
+    .find((b) => b.textContent.includes('Adicionar endereço'))
+
+  botaoNovoEndereco.addEventListener('click', async () => {
     const { error } = await supabase.from('endereco').insert({
       id_empreendimento: empreendimento.id,
       seq: enderecos.length + 1,
@@ -358,12 +432,23 @@ if (dados) {
     for (const campo of formNovo.querySelectorAll('input, button')) campo.disabled = true
   }
 
+  formFotos.addEventListener('submit', (evento) => {
+    evento.preventDefault()
+    avisar(formFotos, 'O envio de fotos depende do Storage do Supabase e entra na próxima etapa.', 'atencao')
+  })
+
+  for (const campo of formFotos.querySelectorAll('input, button')) campo.disabled = true
+  formFotos.querySelector('.dica').textContent =
+    'O envio de fotos depende do Storage do Supabase e entra na próxima etapa.'
+
   const verPublica = document.querySelector('a[href^="empreendimento.html"]')
   if (verPublica) verPublica.href = `empreendimento.html?id=${empreendimento.id}`
 
   ligarBotaoSair()
   await carregarCategorias()
   preencherDados()
+  montarContatos(grupoTelefones, 'telefone')
+  montarContatos(grupoWhatsapps, 'whatsapp')
   await carregarEnderecos()
   await carregarUsuarios()
 }

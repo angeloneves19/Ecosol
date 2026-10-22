@@ -1,4 +1,4 @@
-alter table empreendimento add column if not exists descricao varchar(1000);
+=alter table empreendimento add column if not exists descricao varchar(1000);
 alter table empreendimento add column if not exists nome_fantasia_visivel boolean not null default true;
 alter table empreendimento add column if not exists telefone2_visivel boolean not null default true;
 alter table empreendimento add column if not exists telefone3_visivel boolean not null default true;
