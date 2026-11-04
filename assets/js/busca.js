@@ -67,7 +67,6 @@ async function carregar() {
       )
     `)
     .in('id_situacao', [2, 3])
-    .eq('empreendimento.id_situacao', 2)
     .order('nome')
 
   if (error) {
@@ -75,7 +74,7 @@ async function carregar() {
     return
   }
 
-  const itens = (data || []).filter(i => i.empreendimento)
+  const itens = (data || []).filter(i => i.empreendimento && i.empreendimento.id_situacao === 2)
 
   if (contador) {
     contador.textContent = `${itens.length} ${itens.length === 1 ? 'item encontrado' : 'itens encontrados'}`

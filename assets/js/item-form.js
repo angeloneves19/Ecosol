@@ -223,9 +223,9 @@ form.addEventListener('submit', async (evento) => {
     const estoque = Number(form.querySelector('[name="estoque"]').value) || 0
     const estoqueVisivel = form.querySelector('[name="estoqueVisivel"]').checked
 
-    const unidadeMap = { 'Não se aplica': 'na', 'Unidade': 'un', 'Quilo': 'kg', 'Litro': 'litro', 'Metro': 'm' }
+    const unidadeOpcoes = { 'Não se aplica': 'na', 'Unidade': 'un', 'Quilo': 'kg', 'Litro': 'litro', 'Metro': 'm' }
     const unidadeTexto = form.querySelector('[name="unidade"]').value
-    const unidade = unidadeMap[unidadeTexto] || 'un'
+    const unidade = unidadeOpcoes[unidadeTexto] || 'un'
 
     const situacaoMap = { 'Disponível': 2, 'Indisponível': 3, 'Descontinuado': 4 }
     const situacaoTexto = form.querySelector('[name="situacao"]').value
