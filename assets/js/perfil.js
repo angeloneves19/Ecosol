@@ -1,5 +1,6 @@
 import { supabase } from './supabase.js'
 import { exigirEmpreendimento, ligarBotaoSair, SITUACOES } from './sessao.js'
+import { carregarFotosEmpreendimento, uploadFotoEmpreendimento, removerFotoEmpreendimento, renderizarGaleria } from './fotos.js'
 import { ligarRepetidor } from './campos-repetidos.js'
 
 const dados = await exigirEmpreendimento()
@@ -432,14 +433,84 @@ if (dados) {
     for (const campo of formNovo.querySelectorAll('input, button')) campo.disabled = true
   }
 
-  formFotos.addEventListener('submit', (evento) => {
+  const galeriaFotos = formFotos.querySelector('.galeria-fotos') || (() => {
+    const div = document.createElement('div')
+    div.className = 'galeria-fotos'
+    formFotos.querySelector('.subtitulo').after(div)
+    return div
+  })()
+
+  const inputFoto = formFotos.querySelector('input[type="file"]')
+  const botaoFoto = formFotos.querySelector('button[type="submit"]')
+  const previaMapa = {}
+
+  async function recarregarGaleria() {
+    try {
+      const fotos = await carregarFotosEmpreendimento(empreendimento.id)
+      renderizarGaleria(fotos, galeriaFotos, async (foto) => {
+        if (!confirm('Remover esta foto?')) return
+        try {
+          await removerFotoEmpreendimento(foto.id, foto.url_imagem, empreendimento.id)
+          await recarregarGaleria()
+          avisar(formFotos, 'Foto removida.', 'informacao')
+        } catch (erro) {
+          avisar(formFotos, 'Não consegui remover: ' + erro.message, 'erro')
+        }
+      })
+    } catch (erro) {
+      galeriaFotos.innerHTML = '<p class="apagado aviso erro">Não consegui carregar as fotos: ' + erro.message + '</p>'
+    }
+  }
+
+  if (inputFoto) {
+    inputFoto.accept = 'image/jpeg,image/png,image/webp'
+
+    inputFoto.addEventListener('change', () => {
+      const arquivo = inputFoto.files[0]
+      if (!arquivo) return
+
+      const leitor = new FileReader()
+      leitor.onload = (evento) => {
+        previaMapa.arquivo = arquivo
+        const previa = formFotos.querySelector('.foto-previa') || document.createElement('img')
+        previa.className = 'foto-previa'
+        previa.src = evento.target.result
+        previa.alt = 'Prévia'
+        previa.style.cssText = 'max-width:200px;max-height:150px;border-radius:8px;margin:8px 0;display:block'
+        if (!formFotos.querySelector('.foto-previa')) {
+          botaoFoto.before(previa)
+        }
+      }
+      leitor.readAsDataURL(arquivo)
+    })
+  }
+
+  formFotos.addEventListener('submit', async (evento) => {
     evento.preventDefault()
-    avisar(formFotos, 'O envio de fotos depende do Storage do Supabase e entra na próxima etapa.', 'atencao')
+    const arquivo = previaMapa.arquivo
+    if (!arquivo) {
+      avisar(formFotos, 'Selecione um arquivo primeiro.', 'erro')
+      return
+    }
+    botaoFoto.disabled = true
+    botaoFoto.textContent = 'Enviando...'
+    try {
+      await uploadFotoEmpreendimento(arquivo, empreendimento.id)
+      previaMapa.arquivo = null
+      if (inputFoto) inputFoto.value = ''
+      const previa = formFotos.querySelector('.foto-previa')
+      if (previa) previa.remove()
+      await recarregarGaleria()
+      avisar(formFotos, 'Foto salva.', 'informacao')
+    } catch (erro) {
+      avisar(formFotos, 'Não consegui enviar: ' + erro.message, 'erro')
+    } finally {
+      botaoFoto.disabled = false
+      botaoFoto.textContent = 'Salvar fotos'
+    }
   })
 
-  for (const campo of formFotos.querySelectorAll('input, button')) campo.disabled = true
-  formFotos.querySelector('.dica').textContent =
-    'O envio de fotos depende do Storage do Supabase e entra na próxima etapa.'
+  recarregarGaleria()
 
   const verPublica = document.querySelector('a[href^="empreendimento.html"]')
   if (verPublica) verPublica.href = `empreendimento.html?id=${empreendimento.id}`
